@@ -1,6 +1,7 @@
 package zzpj.breathalyser.model;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import lombok.Data;
@@ -11,6 +12,22 @@ import lombok.Data;
 @Data
 public class UserDetails {
 
+    public UserDetails(StringProperty name, StringProperty surname, StringProperty phoneNumber, IntegerProperty weight, IntegerProperty height, IntegerProperty age, BooleanProperty gender) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.weight = weight;
+        this.height = height;
+        this.age = age;
+        this.gender = gender;
+        if (getGender()){
+            setBodyWaterConstant(0.49); // 0.49 - body water constant for FEMALE
+        }
+        else if (!getGender()){
+            setBodyWaterConstant(0.58); // 0.58 - body water constant for MALE
+        }
+    }
+
     private StringProperty name;
     private StringProperty surname;
     private StringProperty phoneNumber;
@@ -18,6 +35,7 @@ public class UserDetails {
     private IntegerProperty height;
     private IntegerProperty age;
     private BooleanProperty gender;
+    private DoubleProperty bodyWaterConstant; // 0.49 - body water constant for FEMALE, 0.58 - body water constant for MALE
 
     public final void setName(String value) {
         name.set(value);
@@ -101,6 +119,18 @@ public class UserDetails {
 
     public final BooleanProperty genderProperty() {
         return gender;
+    }
+
+    public final void setBodyWaterConstant(Double value) {
+        bodyWaterConstant.set(value);
+    }
+
+    public final Double getBodyWaterConstant() {
+        return bodyWaterConstant.get();
+    }
+
+    public final DoubleProperty bodyWaterConstantProperty() {
+        return bodyWaterConstant;
     }
 
 
