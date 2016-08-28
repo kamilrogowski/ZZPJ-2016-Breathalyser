@@ -25,6 +25,15 @@ public class SoberCalculator {
     private double volumeOfEthanolInMl;
     private double estimatedPeakBloodAlcoholConcentrationInPermilles;
     private final double factorToConvertTheAmountInGramsToSwedishStandards = 1.2;
+
+    public List<Drink> getListOfDrink() {
+        return listOfDrink;
+    }
+
+    public void setListOfDrink(List<Drink> listOfDrink) {
+        this.listOfDrink = listOfDrink;
+    }
+
     private List<Drink> listOfDrink;
 
     public SoberCalculator(){
@@ -41,7 +50,7 @@ public class SoberCalculator {
         return massOfEthanolInGrams;
     }
 
-    public void setNumberOfStandardDrinksContaining10gramsOfEthanol(){
+    private void setNumberOfStandardDrinksContaining10gramsOfEthanol(){
         numberOfStandardDrinksContaining10gramsOfEthanol = (this.getMassOfEthanolInDrinkInGrams(this.listOfDrink))/10.0;
     }
 
