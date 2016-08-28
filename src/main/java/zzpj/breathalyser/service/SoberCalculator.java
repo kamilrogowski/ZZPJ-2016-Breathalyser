@@ -16,48 +16,50 @@ import zzpj.breathalyser.model.UserDetails;
  * @author Krzychu
  */
 public class SoberCalculator {
-    
+
     private final double constantForBodyWaterInTheBlood = 0.806;
-    private DoubleBinding numberOfStandardDrinksContaining10gramsOfEthanol;
+    private double numberOfStandardDrinksContaining10gramsOfEthanol;
     private final double metabolicConstant = 0.017;
-    private DoubleBinding massOfEthanolInGrams;
+    private double massOfEthanolInGrams;
     private final double densityOfEthanol = 0.8;
-    private DoubleProperty volumeOfEthanolInMl;
-    private DoubleBinding estimatedPeakBloodAlcoholConcentrationInPermilles;
+    private double volumeOfEthanolInMl;
+    private double estimatedPeakBloodAlcoholConcentrationInPermilles;
     private final double factorToConvertTheAmountInGramsToSwedishStandards = 1.2;
     private List<Drink> listOfDrink;
 
-    public SoberCalculator() {
+    public SoberCalculator(){
+        numberOfStandardDrinksContaining10gramsOfEthanol = 0.0;
+        massOfEthanolInGrams = 0.0;
+        estimatedPeakBloodAlcoholConcentrationInPermilles = 0.0;
+        listOfDrink = new ArrayList();
     }
-    
-    public DoubleBinding getMassOfEthanolInDrinkInGrams(List<Drink> listOfDrink){
+
+    public double getMassOfEthanolInDrinkInGrams(List<Drink> listOfDrink){
         for(int i = 0; i < listOfDrink.size(); i++){
-        massOfEthanolInGrams = massOfEthanolInGrams.add(densityOfEthanol*listOfDrink.get(i).getVolumeOfEthanolInDrinkInMl());
+            massOfEthanolInGrams = massOfEthanolInGrams + densityOfEthanol*listOfDrink.get(i).getVolumeOfEthanolInDrinkInMl();
         }
         return massOfEthanolInGrams;
     }
-    
+
     public void setNumberOfStandardDrinksContaining10gramsOfEthanol(){
-        numberOfStandardDrinksContaining10gramsOfEthanol = (this.getMassOfEthanolInDrinkInGrams(this.listOfDrink)).divide(10.0);
+        numberOfStandardDrinksContaining10gramsOfEthanol = (this.getMassOfEthanolInDrinkInGrams(this.listOfDrink))/10.0;
     }
-    
-    public DoubleBinding getNumberOfStandardDrinksContaining10gramsOfEthanol(){
+
+    public double getNumberOfStandardDrinksContaining10gramsOfEthanol(){
         this.setNumberOfStandardDrinksContaining10gramsOfEthanol();
         return this.numberOfStandardDrinksContaining10gramsOfEthanol;
     }
-    
-    public DoubleBinding getEstimatedPeakBloodAlcoholConcentration(UserDetails userDetails, DoubleProperty drinkingPeriodInHours){
-        
-        estimatedPeakBloodAlcoholConcentrationInPermilles = this.getNumberOfStandardDrinksContaining10gramsOfEthanol().multiply(this.constantForBodyWaterInTheBlood).multiply(this.factorToConvertTheAmountInGramsToSwedishStandards);
-        estimatedPeakBloodAlcoholConcentrationInPermilles = estimatedPeakBloodAlcoholConcentrationInPermilles.divide(userDetails.getBodyWaterConstant()*userDetails.getWeight());
-        estimatedPeakBloodAlcoholConcentrationInPermilles = estimatedPeakBloodAlcoholConcentrationInPermilles.subtract(drinkingPeriodInHours.multiply(this.metabolicConstant));
-        estimatedPeakBloodAlcoholConcentrationInPermilles = estimatedPeakBloodAlcoholConcentrationInPermilles.multiply(10.0);
+
+    public double getEstimatedPeakBloodAlcoholConcentration(UserDetails userDetails, double drinkingPeriodInHours){
+
+        estimatedPeakBloodAlcoholConcentrationInPermilles = ((this.constantForBodyWaterInTheBlood*this.getNumberOfStandardDrinksContaining10gramsOfEthanol()*this.factorToConvertTheAmountInGramsToSwedishStandards)
+                /(userDetails.getBodyWaterConstant()*userDetails.getWeight())
+                -(this.metabolicConstant*drinkingPeriodInHours))*10;
         return estimatedPeakBloodAlcoholConcentrationInPermilles;
     }
-    
+
     public void addDrinkToListOfDrink(Drink drink){
         this.listOfDrink.add(drink);
     }
-    
-}
 
+}

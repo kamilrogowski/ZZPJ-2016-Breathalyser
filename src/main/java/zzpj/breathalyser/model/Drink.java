@@ -14,57 +14,43 @@ import javafx.beans.property.StringProperty;
  */
 public class Drink {
 
-    public Drink(StringProperty nameOfDrink, DoubleProperty volumeOfDrinkInMl, DoubleProperty percentageOfEthanolInDrink) {
+    public Drink(String nameOfDrink, double volumeOfDrinkInMl, double percentageOfEthanolInDrink){
         this.nameOfDrink = nameOfDrink;
         this.volumeOfDrinkInMl = volumeOfDrinkInMl;
         this.percentageOfEthanolInDrink = percentageOfEthanolInDrink;
     }
 
-    public final void setNameOfDrink(String value) {
-        nameOfDrink.set(value);
-    }
+    private String nameOfDrink;
+    private double volumeOfDrinkInMl;
+    private double percentageOfEthanolInDrink;
 
-    public final String getNameOfDrink() {
-        return nameOfDrink.get();
-    }
-
-    public final StringProperty nameOfDrinkProperty() {
-        return nameOfDrink;
-    }
-
-    public final void setVolumeOfDrinkInMl(Double value) {
-        volumeOfDrinkInMl.set(value);
-    }
-
-    public final Double getVolumeOfDrinkInMl() {
-        return volumeOfDrinkInMl.get();
-    }
-
-    public final DoubleProperty volumeOfDrinkInMlProperty() {
-        return volumeOfDrinkInMl;
-    }
-
-    public final void setPercentageOfEthanolInDrink(Double value) {
-        percentageOfEthanolInDrink.set(value);
-    }
-
-    public final Double getPercentageOfEthanolInDrink() {
-        return percentageOfEthanolInDrink.get();
-    }
-
-    public final DoubleProperty percentageOfEthanolInDrinkProperty() {
-        return percentageOfEthanolInDrink;
-    }
-    
-    private StringProperty nameOfDrink;
-    private DoubleProperty volumeOfDrinkInMl;
-    private DoubleProperty percentageOfEthanolInDrink;
-    
     private double volumeOfEthanolInMl;
-    
+
     public double getVolumeOfEthanolInDrinkInMl(){
         return volumeOfEthanolInMl = this.getVolumeOfDrinkInMl()*(this.getPercentageOfEthanolInDrink()/100);
     }
-    
 
+    public String getNameOfDrink(){
+        return this.nameOfDrink;
+    }
+
+    public double getVolumeOfDrinkInMl(){
+        return this.volumeOfDrinkInMl;
+    }
+
+    public double getPercentageOfEthanolInDrink(){
+        return this.percentageOfEthanolInDrink;
+    }
+
+    public void setNameOfDrink(String nameOfDrink){
+        this.nameOfDrink = nameOfDrink;
+    }
+
+    public void setVolumeOfDrinkInMl(double volumeOfDrinkInMl){
+        this.volumeOfDrinkInMl = volumeOfDrinkInMl;
+    }
+
+    public void setPercentageOfEthanolInDrink(double percentageOfEthanolInDrink){
+        this.percentageOfEthanolInDrink = percentageOfEthanolInDrink;
+    }
 }
