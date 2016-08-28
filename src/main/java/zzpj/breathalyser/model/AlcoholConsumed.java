@@ -12,9 +12,9 @@ import lombok.Data;
 @Data
 public class AlcoholConsumed {
 
-    private StringProperty drinkType = new SimpleStringProperty();
-    private StringProperty alcoholLevel = new SimpleStringProperty();
-    private StringProperty drinkCapacity = new SimpleStringProperty();
+    private String drinkType;
+    private String alcoholLevel;
+    private String drinkCapacity;
     private User user;
 
 }

@@ -21,21 +21,11 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("wóda");
-        Button btn = new Button();
-        btn.setText("21:37");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 250));
-        primaryStage.show();
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+        Scene scene = new Scene(root, 300, 275);
+        stage.setTitle("zzz");
+        stage.setScene(scene);
+        stage.show();
     }
 }

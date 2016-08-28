@@ -1,9 +1,6 @@
 package zzpj.breathalyser.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import lombok.Data;
 
 /**
@@ -11,8 +8,16 @@ import lombok.Data;
  */
 @Data
 public class UserDetails {
+    private String name;
+    private String surname;
+    private String phoneNumber;
+    private double weight;
+    private double height;
+    private int age;
+    private boolean gender;
+    private double bodyWaterConstant; // 0.49 - body water constant for FEMALE, 0.58 - body water constant for MALE
 
-    public UserDetails(StringProperty name, StringProperty surname, StringProperty phoneNumber, IntegerProperty weight, IntegerProperty height, IntegerProperty age, BooleanProperty gender) {
+    public UserDetails(String name, String surname, String phoneNumber, double weight, double height, int age, boolean gender) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -20,118 +25,8 @@ public class UserDetails {
         this.height = height;
         this.age = age;
         this.gender = gender;
-        if (getGender()){
-            setBodyWaterConstant(0.49); // 0.49 - body water constant for FEMALE
-        }
-        else if (!getGender()){
-            setBodyWaterConstant(0.58); // 0.58 - body water constant for MALE
-        }
+        if (gender) bodyWaterConstant = 0.49;
+        else bodyWaterConstant = 0.58;
     }
-
-    private StringProperty name;
-    private StringProperty surname;
-    private StringProperty phoneNumber;
-    private IntegerProperty weight;
-    private IntegerProperty height;
-    private IntegerProperty age;
-    private BooleanProperty gender;
-    private DoubleProperty bodyWaterConstant; // 0.49 - body water constant for FEMALE, 0.58 - body water constant for MALE
-
-    public final void setName(String value) {
-        name.set(value);
-    }
-
-    public final String getName() {
-        return name.get();
-    }
-
-    public final StringProperty nameProperty() {
-        return name;
-    }
-
-    public final void setSurname(String value) {
-        surname.set(value);
-    }
-
-    public final String getSurname() {
-        return surname.get();
-    }
-
-    public final StringProperty surnameProperty() {
-        return surname;
-    }
-
-    public final void setPhoneNumber(String value) {
-        phoneNumber.set(value);
-    }
-
-    public final String getPhoneNumber() {
-        return phoneNumber.get();
-    }
-
-    public final StringProperty phoneNumberProperty() {
-        return phoneNumber;
-    }
-
-    public final void setWeight(Integer value) {
-        weight.set(value);
-    }
-
-    public final Integer getWeight() {
-        return weight.get();
-    }
-
-    public final IntegerProperty weightProperty() {
-        return weight;
-    }
-
-    public final void setHeight(Integer value) {
-        height.set(value);
-    }
-
-    public final Integer getHeight() {
-        return height.get();
-    }
-
-    public final IntegerProperty heightProperty() {
-        return height;
-    }
-
-    public final void setAge(Integer value) {
-        age.set(value);
-    }
-
-    public final Integer getAge() {
-        return age.get();
-    }
-
-    public final IntegerProperty ageProperty() {
-        return age;
-    }
-
-    public final void setGender(Boolean value) {
-        gender.set(value);
-    }
-
-    public final Boolean getGender() {
-        return gender.get();
-    }
-
-    public final BooleanProperty genderProperty() {
-        return gender;
-    }
-
-    public final void setBodyWaterConstant(Double value) {
-        bodyWaterConstant.set(value);
-    }
-
-    public final Double getBodyWaterConstant() {
-        return bodyWaterConstant.get();
-    }
-
-    public final DoubleProperty bodyWaterConstantProperty() {
-        return bodyWaterConstant;
-    }
-
 
 }

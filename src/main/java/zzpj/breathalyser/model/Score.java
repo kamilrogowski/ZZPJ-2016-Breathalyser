@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Score {
 
-    private DoubleProperty scoreValue = new SimpleDoubleProperty();
+    private double scoreValue;
     private User userScore;
 
 }
