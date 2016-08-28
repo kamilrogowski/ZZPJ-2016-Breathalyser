@@ -2,6 +2,7 @@ package zzpj.breathalyser.model;
 
 import javafx.beans.property.StringProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
  * Created by Kamil Rogowski on 13.06.2016.
  */
 @Data
+@NoArgsConstructor
  public class User {
 
     public User(String login, String password, String email, UserDetails userDetails) {

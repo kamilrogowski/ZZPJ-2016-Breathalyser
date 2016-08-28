@@ -15,11 +15,13 @@ import zzpj.breathalyser.model.User;
 @Log
 public class UsersRepository implements IUsersRepository {
 
-    private ObservableList<User> users = FXCollections.observableArrayList();
+    private ObservableList<User> users;
     private UserDataInitializer userDataInitializer;
 
     public UsersRepository() {
+
         userDataInitializer = new UserDataInitializer();
+        users = FXCollections.observableArrayList();
     }
 
     @Override

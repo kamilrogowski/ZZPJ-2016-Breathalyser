@@ -39,13 +39,12 @@ public class UserDataInitializer {
     private UserDetails generateUserDetails(int i) {
         String name = "name" + i;
         String surname = "surname" + i;
-        String phone = "11122233" + i;
         double weight = 120 + i * 2;
         double height = 50 + i * 2;
         int age = 50 + i * 2;
         boolean gender = i % 2 == 0;
 
-        return new UserDetails(name, surname, phone, weight, height, age, gender);
+        return new UserDetails(name, surname, weight, height, age, gender);
     }
 
 }

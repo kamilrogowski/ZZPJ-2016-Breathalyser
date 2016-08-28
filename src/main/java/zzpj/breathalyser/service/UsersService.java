@@ -1,6 +1,9 @@
 package zzpj.breathalyser.service;
 
+import com.sun.istack.internal.NotNull;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import lombok.extern.java.Log;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.repository.IUsersRepository;
 import zzpj.breathalyser.repository.UsersRepository;
@@ -10,6 +13,7 @@ import javax.inject.Inject;
 /**
  * Created by Kamil Rogowski on 28.08.2016.
  */
+@Log
 public class UsersService implements IUsersService {
 
     private IUsersRepository usersRepository;
@@ -18,9 +22,13 @@ public class UsersService implements IUsersService {
         usersRepository.initializeUsers();
     }
 
-    public boolean addUser(User user) {
-        usersRepository.addUser(user);
-        return true;
+    public boolean addUser(@NotNull User user) {
+        if (!usersRepository.getUsers().contains(user)) {
+            usersRepository.addUser(user);
+            log.info("User: " + user.getLogin() + " has been created");
+            return true;
+        }
+        return false;
     }
 
     public void setUsersRepository(UsersRepository usersRepository) {
@@ -32,12 +40,17 @@ public class UsersService implements IUsersService {
 
         for (User userToCheck : usersRepository.getUsers()) {
 
-            if (userToCheck != null && userToCheck.getLogin().equals(login) &&
+            if (userToCheck.getLogin().equals(login) &&
                     userToCheck.getPassword().equals(password)) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public ObservableList<User> getAllUsers() {
+        return usersRepository.getUsers();
     }
 }
 
