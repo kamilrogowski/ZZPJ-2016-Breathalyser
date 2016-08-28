@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zzpj.breathalyser.model;
+package zzpj.breathalyser.service;
 
 import java.util.*;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
+import zzpj.breathalyser.model.Drink;
+import zzpj.breathalyser.model.UserDetails;
 
 /**
  *
