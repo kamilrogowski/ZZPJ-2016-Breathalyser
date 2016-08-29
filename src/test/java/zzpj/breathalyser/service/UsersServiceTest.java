@@ -37,16 +37,19 @@ public class UsersServiceTest {
 
     @Test
     public void setUsersRepository() throws Exception {
+
         IUsersService usersService = new UsersService();
         UsersRepository usersRepository = new UsersRepository();
         usersService.setUsersRepository(usersRepository);
         IUsersRepository result = usersService.getUsersRepository();
         IUsersRepository expected = usersRepository;
         Assert.assertEquals(expected, result);
+
     }
 
     @Test
     public void onLogin() throws Exception {
+
         IUsersService usersService = new UsersService();
         UserDetails userDetails = new UserDetails("name", "surname", 100, 180, 25, true);
         User user = new User("login", "password", "email", userDetails);
@@ -54,10 +57,12 @@ public class UsersServiceTest {
         boolean result = usersService.onLogin("login", "password");
         boolean expected = true;
         Assert.assertEquals(expected, result);
+        
     }
 
     @Test
     public void getAllUsers() throws Exception {
+
         IUsersService usersService = new UsersService();
         UserDetails userDetails = new UserDetails("name", "surname", 100, 180, 25, true);
         User user = new User("login", "password", "email", userDetails);
@@ -65,6 +70,7 @@ public class UsersServiceTest {
         int result = usersService.getAllUsers().size();
         int expected = 1;
         Assert.assertEquals(expected, result);
+
     }
 
 }
