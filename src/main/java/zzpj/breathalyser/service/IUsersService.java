@@ -15,4 +15,6 @@ public interface IUsersService {
     boolean onLogin(String login, String password);
     ObservableList<User> getAllUsers();
     void setUsersRepository(UsersRepository usersRepository);
+
+    IUsersRepository getUsersRepository();
 }
