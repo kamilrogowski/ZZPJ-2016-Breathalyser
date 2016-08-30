@@ -16,7 +16,15 @@ import javax.inject.Inject;
 @Log
 public class UsersService implements IUsersService {
 
-    private IUsersRepository usersRepository;
+    private IUsersRepository usersRepository = new UsersRepository();
+
+    public IUsersRepository getUsersRepository() {
+        return usersRepository;
+    }
+
+    public void setUsersRepository(IUsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
     public void initializeUsers() {
         usersRepository.initializeUsers();
