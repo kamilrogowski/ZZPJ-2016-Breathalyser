@@ -36,16 +36,27 @@ public class UsersService implements IUsersService {
     }
 
     @Override
-    public boolean onLogin(String login, String password) {
+    public User findByLogin(String login) {
+        for (User userFound : usersRepository.getUsers()) {
+
+            if (userFound.getLogin().equals(login)) {
+                return userFound;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public User onLogin(String login, String password) {
 
         for (User userToCheck : usersRepository.getUsers()) {
 
             if (userToCheck.getLogin().equals(login) &&
                     userToCheck.getPassword().equals(password)) {
-                return true;
+                return userToCheck;
             }
         }
-        return false;
+        return null;
     }
 
     @Override

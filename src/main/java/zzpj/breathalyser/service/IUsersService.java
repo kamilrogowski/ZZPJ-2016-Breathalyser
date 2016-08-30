@@ -12,7 +12,8 @@ import zzpj.breathalyser.repository.UsersRepository;
 public interface IUsersService {
     void initializeUsers();
     boolean addUser(User user);
-    boolean onLogin(String login, String password);
+    User onLogin(String login, String password);
     ObservableList<User> getAllUsers();
     void setUsersRepository(UsersRepository usersRepository);
+    User findByLogin(String login);
 }

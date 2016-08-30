@@ -52,7 +52,7 @@
             <Insets right="30.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="loadRegisterForm" mnemonicParsing="false" onAction="#onLoadRegister" text="Register" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+      <Button mnemonicParsing="false" onAction="#onLoadRegister" text="Register" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets right="100.0" />
          </GridPane.margin>

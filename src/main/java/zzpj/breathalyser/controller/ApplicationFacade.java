@@ -20,4 +20,5 @@ public class ApplicationFacade {
 
     @FXML private RegistrationController registrationController;
 
+    @FXML private DashboardController dashboardController;
 }

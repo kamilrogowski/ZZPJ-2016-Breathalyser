@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class UserDataInitializer {
 
-    private final int USERS_MAX_SIZE = 5;
+    private final int USERS_MAX_SIZE = 10;
 
     private ObservableList<User> userData = FXCollections.observableArrayList();
 
@@ -28,23 +28,24 @@ public class UserDataInitializer {
 
 
     private User generateUser(int i) {
-        String login = "login" + i;
-        String password = "password" + i;
+        String login = "1" + i;
+        String password = "1" + i;
         String email = "email" + i + "@com.pl";
+        String name = "name" + i;
+        String surname = "surname" + i;
         final UserDetails userDetails = generateUserDetails(i);
 
-        return new User(login, password, email, userDetails);
+        return new User(login, password, email, name, surname, userDetails);
     }
 
     private UserDetails generateUserDetails(int i) {
-        String name = "name" + i;
-        String surname = "surname" + i;
+
         double weight = 120 + i * 2;
         double height = 50 + i * 2;
         int age = 50 + i * 2;
         boolean gender = i % 2 == 0;
 
-        return new UserDetails(name, surname, weight, height, age, gender);
+        return new UserDetails(weight, height, age, gender);
     }
 
 }

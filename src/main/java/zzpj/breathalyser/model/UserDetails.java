@@ -10,17 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserDetails {
-    private String name;
-    private String surname;
+
     private double weight;
     private double height;
     private int age;
     private boolean gender;
     private double bodyWaterConstant; // 0.49 - body water constant for FEMALE, 0.58 - body water constant for MALE
 
-    public UserDetails(String name, String surname, double weight, double height, int age, boolean gender) {
-        this.name = name;
-        this.surname = surname;
+    public UserDetails( double weight, double height, int age, boolean gender) {
         this.weight = weight;
         this.height = height;
         this.age = age;
