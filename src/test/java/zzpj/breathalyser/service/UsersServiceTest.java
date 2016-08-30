@@ -57,11 +57,6 @@ public class UsersServiceTest {
         boolean result = usersService.onLogin("login", "password");
         boolean expected = true;
         Assert.assertEquals(expected, result);
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> e746242c01b44816723701c46f408e6fe5e77b59
     }
 
     @Test
