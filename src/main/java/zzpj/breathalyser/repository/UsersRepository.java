@@ -19,7 +19,6 @@ public class UsersRepository implements IUsersRepository {
     private UserDataInitializer userDataInitializer;
 
     public UsersRepository() {
-
         userDataInitializer = new UserDataInitializer();
         users = FXCollections.observableArrayList();
     }
