@@ -4,4 +4,5 @@
 <VBox fx:controller="zzpj.breathalyser.controller.ApplicationFacade" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
     <fx:include source="login.fxml"/>
     <fx:include source="register.fxml"/>
+    <fx:include source="dashboard.fxml"/>
 </VBox>

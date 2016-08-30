@@ -7,14 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import zzpj.breathalyser.Utils.ValidationMessageSuffix;
-import zzpj.breathalyser.repository.IUsersRepository;
+import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.repository.UsersRepository;
 import zzpj.breathalyser.service.IUsersService;
 import zzpj.breathalyser.service.UsersService;
@@ -39,21 +37,40 @@ public class LoginController {
 
     }
 
-    public void onLogin() {
-        final boolean userExists = usersService.onLogin(userLogin.getText(), userPassword.getText());
-        if (!userExists) {
-            message.setText("USER DOESNT EXIST "  + ValidationMessageSuffix.WRR + " !!! :(");
-        } else message.setText("");
+    public void onLogin() throws IOException {
+        final User myAccount = usersService.onLogin(userLogin.getText(), userPassword.getText());
+        if (myAccount != null) {
+            message.setText("");
+            loadDashboard(myAccount);
+        } else {
+            message.setText("USER DOESNT EXIST " + ValidationMessageSuffix.WRR + " !!! :(");
+        }
     }
 
     public void onLoadRegister() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("register.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(new Scene( loader.load()));
+        stage.setScene(new Scene(loader.load()));
         RegistrationController controller = loader.<RegistrationController>getController();
         controller.setUsersService(usersService);
         stage.show();
     }
 
+    public void loadDashboard(User user) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(
+                "dashboard.fxml"));
+        Parent root = (Parent) loader.load();
+        DashboardController dashboardController = loader.getController();
+        dashboardController.setUsersService(usersService);
+        dashboardController.setMyAccount(user);
+        dashboardController.initUserList();
+        Scene newScene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.setMaximized(true);
+        newStage.setScene(newScene);
+        newStage.show();
+
+
+    }
 }
