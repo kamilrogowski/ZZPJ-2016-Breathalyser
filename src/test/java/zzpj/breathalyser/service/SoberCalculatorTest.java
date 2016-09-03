@@ -53,7 +53,7 @@ public class SoberCalculatorTest {
     @Test
     public void getEstimatedPeakBloodAlcoholConcentration() throws Exception {
 
-        UserDetails userDetails = new UserDetails("firstName", "surname", 100.0, 181.0, 22, false); // parametry: imię, nazwisko, waga, wzrost, wiek, płeć
+        UserDetails userDetails = new UserDetails(100.0, 181.0, 22, false); // parametry: imię, nazwisko, waga, wzrost, wiek, płeć
         Drink beer = new Drink("Beer", 500.0, 5.0); // parametry: nazwa, objętość w ml, ile procent xD
         Drink vodka = new Drink("Vodka", 250, 40.0);
         SoberCalculator calculator = new SoberCalculator();
