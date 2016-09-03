@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by Krzychu on 28.08.2016.
  */
 public class SoberCalculatorTest {
-   /* @Before
+    @Before
     public void setUp() throws Exception {
 
     }
@@ -78,6 +78,6 @@ public class SoberCalculatorTest {
         int result = calculator.getListOfDrink().size();
         int expected = 4;
         Assert.assertEquals(expected, result, 0.0);
-    }*/
+    }
 
 }
