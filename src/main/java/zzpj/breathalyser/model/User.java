@@ -33,5 +33,8 @@ import java.util.Set;
     private Set<Score> userScores = new HashSet<>();
     private Set<User> friends = new HashSet<>();
 
+    public Set<User> getFriends() {
+        return this.friends;
+    }
 
 }

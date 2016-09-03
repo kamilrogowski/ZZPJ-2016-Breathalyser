@@ -17,6 +17,7 @@
                   
                   <TableColumn fx:id="surnameColumn" prefWidth="94.0" text="surname" />
                   <TableColumn fx:id="phoneColumn" prefWidth="83.0" text="email" />
+                  <TableColumn fx:id="actionColumn" prefWidth="83.0" text="add" />
               </columns>
             </TableView>
             <Text fill="#a200ff" layoutX="23.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All users">
