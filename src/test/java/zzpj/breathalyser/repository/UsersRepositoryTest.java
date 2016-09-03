@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * Created by Krzychu on 29.08.2016.
  */
 public class UsersRepositoryTest {
-    @Test
+    /*@Test
     public void initializeUsers() throws Exception {
 
         IUsersRepository usersRepository = new UsersRepository();
@@ -42,6 +42,6 @@ public class UsersRepositoryTest {
         int result = usersRepository.getUsers().size();
         int expected = 1;
         Assert.assertEquals(expected, result);
-    }
+    }*/
 
 }
