@@ -1,6 +1,8 @@
 package zzpj.breathalyser.model;
 
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,9 +33,9 @@ import java.util.Set;
     private UserDetails userDetails;
     private Set<Meeting> meetings = new HashSet<>();
     private Set<Score> userScores = new HashSet<>();
-    private Set<User> friends = new HashSet<>();
+    private ObservableList<User> friends = FXCollections.observableArrayList();
 
-    public Set<User> getFriends() {
+    public ObservableList<User> getFriends() {
         return this.friends;
     }
 
