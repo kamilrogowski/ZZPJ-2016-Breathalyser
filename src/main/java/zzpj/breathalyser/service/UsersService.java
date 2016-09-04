@@ -9,6 +9,8 @@ import zzpj.breathalyser.repository.IUsersRepository;
 import zzpj.breathalyser.repository.UsersRepository;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Kamil Rogowski on 28.08.2016.
@@ -52,6 +54,11 @@ public class UsersService implements IUsersService {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<User> findMyFriends(User myAccount) {
+       return myAccount.getFriends();
     }
 
     @Override

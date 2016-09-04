@@ -62,8 +62,8 @@ public class LoginController {
                 "dashboard.fxml"));
         Parent root = (Parent) loader.load();
         DashboardController dashboardController = loader.getController();
-        dashboardController.setUsersService(usersService);
         dashboardController.setMyAccount(user);
+        dashboardController.setUsersService(usersService);
         dashboardController.initUserList();
         Scene newScene = new Scene(root);
         Stage newStage = new Stage();

@@ -34,7 +34,6 @@ public class UserDataInitializer {
         String name = "name" + i;
         String surname = "surname" + i;
         final UserDetails userDetails = generateUserDetails(i);
-
         return new User(login, password, email, name, surname, userDetails);
     }
 

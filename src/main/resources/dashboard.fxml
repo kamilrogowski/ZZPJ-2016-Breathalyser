@@ -10,14 +10,14 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="615.0" prefWidth="1029.0" VBox.vgrow="ALWAYS">
       <children>
             <Text fx:id="loginMessage" layoutX="441.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login: " />
-            <TableView fx:id="allUsers" layoutX="14.0" layoutY="30.0" prefHeight="152.0" prefWidth="314.0">
+            <TableView fx:id="allUsers" layoutX="14.0" layoutY="30.0" prefHeight="151.0" prefWidth="383.0">
               <columns>
                 <TableColumn fx:id="loginColumn" prefWidth="59.0" text="login" />
                 <TableColumn fx:id="nameColumn" prefWidth="77.0" text="name" />
-                  
+                  <TableColumn fx:id="actionColumn" prefWidth="83.0" text="add" />
                   <TableColumn fx:id="surnameColumn" prefWidth="94.0" text="surname" />
                   <TableColumn fx:id="phoneColumn" prefWidth="83.0" text="email" />
-                  <TableColumn fx:id="actionColumn" prefWidth="83.0" text="add" />
+                  <TableColumn prefWidth="75.0" text="action" />
               </columns>
             </TableView>
             <Text fill="#a200ff" layoutX="23.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All users">
@@ -25,8 +25,20 @@
                   <Font size="19.0" />
                </font>
             </Text>
+            <TableView fx:id="myFriends" layoutX="14.0" layoutY="213.0" prefHeight="151.0" prefWidth="309.0">
+               <columns>
+                  <TableColumn fx:id="friendLogin" prefWidth="59.0" text="login" />
+                  <TableColumn fx:id="friendName" prefWidth="77.0" text="name" />
+                  <TableColumn fx:id="friendSurname" prefWidth="94.0" text="surname" />
+                  <TableColumn fx:id="friendPhoneNumber" prefWidth="83.0" text="phone" />
+               </columns>
+            </TableView>
+            <Text fx:id="loginMessage1" fill="RED" layoutX="23.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My friends">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
       </children>
     </AnchorPane>
-      <Text fx:id="loginMessage1" strokeType="OUTSIDE" strokeWidth="0.0" text="Login: " />
   </children>
 </VBox>

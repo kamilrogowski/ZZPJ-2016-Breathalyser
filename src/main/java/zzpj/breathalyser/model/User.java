@@ -6,7 +6,9 @@ import javafx.collections.ObservableList;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,9 +36,5 @@ import java.util.Set;
     private Set<Meeting> meetings = new HashSet<>();
     private Set<Score> userScores = new HashSet<>();
     private ObservableList<User> friends = FXCollections.observableArrayList();
-
-    public ObservableList<User> getFriends() {
-        return this.friends;
-    }
 
 }
