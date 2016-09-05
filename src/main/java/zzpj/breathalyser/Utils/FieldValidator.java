@@ -4,6 +4,8 @@ import java.util.regex.Pattern;
 
 public class FieldValidator {
 
+    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm";
+
     public static boolean passordMatch(String password, String repeatedPassword) {
 
         return password.equals(repeatedPassword);
@@ -21,5 +23,10 @@ public class FieldValidator {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static boolean isDateTimeValid(String stringToCheck) {
+
+        return stringToCheck.matches(DATETIME_FORMAT);
     }
 }

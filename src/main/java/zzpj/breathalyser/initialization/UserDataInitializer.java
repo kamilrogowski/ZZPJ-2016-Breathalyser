@@ -27,18 +27,17 @@ public class UserDataInitializer {
     }
 
 
-    private User generateUser(int i) {
+    public User generateUser(int i) {
         String login = "1" + i;
         String password = "1" + i;
         String email = "email" + i + "@com.pl";
         String name = "name" + i;
         String surname = "surname" + i;
         final UserDetails userDetails = generateUserDetails(i);
-
         return new User(login, password, email, name, surname, userDetails);
     }
 
-    private UserDetails generateUserDetails(int i) {
+    public UserDetails generateUserDetails(int i) {
 
         double weight = 120 + i * 2;
         double height = 50 + i * 2;

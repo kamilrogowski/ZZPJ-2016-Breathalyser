@@ -19,7 +19,7 @@ public class UsersServiceTest {
         UsersService usersService = new UsersService();
         usersService.initializeUsers();
         int result = usersService.getAllUsers().size();
-        int expected = 5;
+        int expected = 10;
         Assert.assertEquals(expected, result);
 
     }

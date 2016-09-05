@@ -14,7 +14,7 @@ public class UserDataInitializerTest {
 
         UserDataInitializer userDataInitializer = new UserDataInitializer();
         int result = userDataInitializer.initUsers().size();
-        int expected = 5;
+        int expected = 10;
         Assert.assertEquals(expected, result);
     }
 

@@ -16,7 +16,7 @@ public class UsersRepositoryTest {
         IUsersRepository usersRepository = new UsersRepository();
         usersRepository.initializeUsers();
         int result = usersRepository.getUsers().size();
-        int expected = 5;
+        int expected = 10;
         Assert.assertEquals(expected, result);
 
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,15 +10,14 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="615.0" prefWidth="1029.0" VBox.vgrow="ALWAYS">
       <children>
-            <Text fx:id="loginMessage" layoutX="441.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login: " />
-            <TableView fx:id="allUsers" layoutX="14.0" layoutY="30.0" prefHeight="152.0" prefWidth="314.0">
+            <Text fx:id="loginMessage" layoutX="810.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login: " />
+            <TableView fx:id="allUsers" layoutX="14.0" layoutY="30.0" prefHeight="151.0" prefWidth="383.0">
               <columns>
                 <TableColumn fx:id="loginColumn" prefWidth="59.0" text="login" />
                 <TableColumn fx:id="nameColumn" prefWidth="77.0" text="name" />
-                  
-                  <TableColumn fx:id="surnameColumn" prefWidth="94.0" text="surname" />
-                  <TableColumn fx:id="phoneColumn" prefWidth="83.0" text="email" />
-                  <TableColumn fx:id="actionColumn" prefWidth="83.0" text="add" />
+                <TableColumn fx:id="surnameColumn" prefWidth="94.0" text="surname" />
+                <TableColumn fx:id="phoneColumn" prefWidth="83.0" text="email" />
+                <TableColumn fx:id="actionColumn" prefWidth="83.0" text="add" />
               </columns>
             </TableView>
             <Text fill="#a200ff" layoutX="23.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All users">
@@ -25,8 +25,54 @@
                   <Font size="19.0" />
                </font>
             </Text>
+            <TableView fx:id="myFriends" layoutX="18.0" layoutY="220.0" prefHeight="151.0" prefWidth="309.0">
+               <columns>
+                  <TableColumn fx:id="friendLogin" prefWidth="59.0" text="login" />
+                  <TableColumn fx:id="friendName" prefWidth="77.0" text="name" />
+                  <TableColumn fx:id="friendSurname" prefWidth="94.0" text="surname" />
+                  <TableColumn fx:id="friendPhoneNumber" prefWidth="83.0" text="phone" />
+               </columns>
+            </TableView>
+            <Text fill="RED" layoutX="18.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My friends">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+          <TableView fx:id="myMeetings" layoutX="428.0" layoutY="30.0" prefHeight="151.0" prefWidth="493.0">
+              <columns>
+                  <TableColumn fx:id="meetingLocationColumn" prefWidth="94.0" text="location" />
+                  <TableColumn fx:id="meetingStartTimeColumn" prefWidth="97.0" text="start time" />
+                  <TableColumn fx:id="meetingEndTimeColumn" prefWidth="119.0" text="end time" />
+                  <TableColumn fx:id="meetingParticipants" prefWidth="252.0" text="participans" />
+              </columns>
+          </TableView>
+          <Separator layoutX="7.0" layoutY="178.0" prefHeight="25.0" prefWidth="921.0" />
+          <!--<TableView fx:id="meetings" layoutX="347.0" layoutY="295.0" prefHeight="175.0" prefWidth="563.0">-->
+              <!--<columns>-->
+                  <!--<TableColumn fx:id="locationColumn" prefWidth="145.0" text="location" />-->
+                  <!--<TableColumn fx:id="startTimeColumn" prefWidth="140.0" text="start time" />-->
+                  <!--<TableColumn fx:id="endTimeColumn" prefWidth="123.0" text="end time" />-->
+                  <!--<TableColumn fx:id="participantsColumn" prefWidth="154.0" text="participants" />-->
+              <!--</columns>-->
+          <!--</TableView>-->
+          <!--<Button layoutX="843.0" layoutY="476.0" mnemonicParsing="false" text="I'm going" />-->
+          <!--<Button layoutX="777.0" layoutY="247.0" mnemonicParsing="false" text="count alcohol content" />-->
+          <!--<Button layoutX="625.0" layoutY="247.0" mnemonicParsing="false" text="remove from my list" />-->
+          <!--<TextField fx:id="addLocation" layoutX="347.0" layoutY="476.0" prefHeight="25.0" prefWidth="134.0" />-->
+          <!--<TextField fx:id="addStartTime" layoutX="489.0" layoutY="476.0" prefHeight="25.0" prefWidth="123.0" />-->
+          <!--<TextField fx:id="addEndTime" layoutX="619.0" layoutY="476.0" prefHeight="25.0" prefWidth="134.0" />-->
+            <Text fill="#4400ff" layoutX="420.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My parties">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Cylinder layoutX="484.0" layoutY="296.0" radius="0.77" />
+            <TextField fx:id="addLocation" layoutX="440.0" layoutY="201.0" promptText="location" />
+            <TextField fx:id="addStartTime" layoutX="761.0" layoutY="202.0" promptText="end time (yyyy-mm-dd HH:mm)" />
+            <TextField fx:id="addEndTime" layoutX="600.0" layoutY="202.0" promptText="start time (yyyy-mm-dd HH:mm)" />
+            <Button fx:id="addButton" layoutX="845.0" layoutY="241.0" mnemonicParsing="false" text="Add event" onAction="#addEvent" />
+          <!--<Button fx:id="addButton" layoutX="786.0" layoutY="476.0" mnemonicParsing="false" onAction="#addButtonClicked" text="add" />-->
       </children>
     </AnchorPane>
-      <Text fx:id="loginMessage1" strokeType="OUTSIDE" strokeWidth="0.0" text="Login: " />
   </children>
 </VBox>
