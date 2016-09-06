@@ -45,6 +45,12 @@
                   <TableColumn fx:id="meetingParticipants" prefWidth="252.0" text="participans" />
               </columns>
           </TableView>
+          <TableView fx:id="friendsInEvents" layoutX="440.0" layoutY="241.0" prefHeight="200.0" prefWidth="149.0">
+              <columns>
+                  <TableColumn fx:id="eventUserName" prefWidth="75.0" text="name" />
+                  <TableColumn fx:id="eventUserSurname" prefWidth="75.0" text="surname" />
+              </columns>
+          </TableView>
           <Separator layoutX="7.0" layoutY="178.0" prefHeight="25.0" prefWidth="921.0" />
           <!--<TableView fx:id="meetings" layoutX="347.0" layoutY="295.0" prefHeight="175.0" prefWidth="563.0">-->
               <!--<columns>-->
