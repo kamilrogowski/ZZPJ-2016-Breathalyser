@@ -37,4 +37,10 @@ import java.util.Set;
     private Set<Score> userScores = new HashSet<>();
     private ObservableList<User> friends = FXCollections.observableArrayList();
 
+   //FIXME temporary "converter'
+    @Override
+    public String toString() {
+        return name;
+
+    }
 }

@@ -7,50 +7,28 @@ package zzpj.breathalyser.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.StringProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 /**
  *
  * @author Krzychu
  */
+@Data
 public class Drink {
-
-    public Drink(String nameOfDrink, double volumeOfDrinkInMl, double percentageOfEthanolInDrink){
-        this.nameOfDrink = nameOfDrink;
-        this.volumeOfDrinkInMl = volumeOfDrinkInMl;
-        this.percentageOfEthanolInDrink = percentageOfEthanolInDrink;
-    }
 
     private String nameOfDrink;
     private double volumeOfDrinkInMl;
     private double percentageOfEthanolInDrink;
-
     private double volumeOfEthanolInMl;
+
+    public Drink(String nameOfDrink, double volumeOfDrinkInMl, double percentageOfEthanolInDrink) {
+        this.nameOfDrink = nameOfDrink;
+        this.volumeOfDrinkInMl = volumeOfDrinkInMl;
+        this.percentageOfEthanolInDrink = percentageOfEthanolInDrink;
+    }
 
     public double getVolumeOfEthanolInDrinkInMl(){
         return volumeOfEthanolInMl = this.getVolumeOfDrinkInMl()*(this.getPercentageOfEthanolInDrink()/100);
-    }
-
-    public String getNameOfDrink(){
-        return this.nameOfDrink;
-    }
-
-    public double getVolumeOfDrinkInMl(){
-        return this.volumeOfDrinkInMl;
-    }
-
-    public double getPercentageOfEthanolInDrink(){
-        return this.percentageOfEthanolInDrink;
-    }
-
-    public void setNameOfDrink(String nameOfDrink){
-        this.nameOfDrink = nameOfDrink;
-    }
-
-    public void setVolumeOfDrinkInMl(double volumeOfDrinkInMl){
-        this.volumeOfDrinkInMl = volumeOfDrinkInMl;
-    }
-
-    public void setPercentageOfEthanolInDrink(double percentageOfEthanolInDrink){
-        this.percentageOfEthanolInDrink = percentageOfEthanolInDrink;
     }
 }

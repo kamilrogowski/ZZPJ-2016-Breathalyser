@@ -17,7 +17,6 @@ public interface IUsersService {
     boolean addUser(User user);
     User onLogin(String login, String password);
     ObservableList<User> getAllUsers();
-    void setUsersRepository(UsersRepository usersRepository);
     User findByLogin(String login);
     List<User> findMyFriends(User myAccount);
 

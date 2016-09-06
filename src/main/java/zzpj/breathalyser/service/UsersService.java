@@ -3,6 +3,8 @@ package zzpj.breathalyser.service;
 import com.sun.istack.internal.NotNull;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.repository.IUsersRepository;
@@ -18,15 +20,8 @@ import java.util.Set;
 @Log
 public class UsersService implements IUsersService {
 
+    @Getter @Setter
     private IUsersRepository usersRepository = new UsersRepository();
-
-    public IUsersRepository getUsersRepository() {
-        return usersRepository;
-    }
-
-    public void setUsersRepository(IUsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
 
     public void initializeUsers() {
         usersRepository.initializeUsers();
@@ -41,10 +36,6 @@ public class UsersService implements IUsersService {
         return false;
     }
 
-    public void setUsersRepository(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
-
     @Override
     public User findByLogin(String login) {
         for (User userFound : usersRepository.getUsers()) {
@@ -56,6 +47,7 @@ public class UsersService implements IUsersService {
         return null;
     }
 
+
     @Override
     public List<User> findMyFriends(User myAccount) {
        return myAccount.getFriends();
@@ -65,7 +57,6 @@ public class UsersService implements IUsersService {
     public User onLogin(String login, String password) {
 
         for (User userToCheck : usersRepository.getUsers()) {
-
             if (userToCheck.getLogin().equals(login) &&
                     userToCheck.getPassword().equals(password)) {
                 return userToCheck;

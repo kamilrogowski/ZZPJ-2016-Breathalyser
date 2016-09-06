@@ -1,43 +1,34 @@
 package zzpj.breathalyser.controller;
 
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.sun.javafx.css.converters.StringConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.application.Application;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.event.*;
-import javafx.geometry.*;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.stage.*;
-import javafx.util.Callback;
+import javafx.util.converter.DateTimeStringConverter;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import lombok.Setter;
+import lombok.extern.java.Log;
+import zzpj.breathalyser.Utils.FieldValidator;
+import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
+import zzpj.breathalyser.repository.IMeetingRepository;
+import zzpj.breathalyser.service.IMeetingService;
 import zzpj.breathalyser.service.IUsersService;
+import zzpj.breathalyser.tasks.AddFriendTask;
 
 import java.net.URL;
-import java.util.Observable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 @Log
@@ -45,6 +36,9 @@ public class DashboardController implements Initializable{
 
     @Setter
     private IUsersService usersService;
+
+    @Setter
+    private IMeetingService meetingService;
 
     @Setter
     private User myAccount;
@@ -56,38 +50,39 @@ public class DashboardController implements Initializable{
 
     @FXML private TableView<User> allUsers;
     @FXML private TableColumn<User, String> loginColumn;
-    @FXML private TableColumn<User, String> nameColumn;
-    @FXML private TableColumn<User, String> surnameColumn;
+    @FXML private TableColumn<UserDetails, String> nameColumn;
+    @FXML private TableColumn<UserDetails, String> surnameColumn;
     @FXML private TableColumn<User, String> phoneColumn;
     @FXML private TableColumn<User, Boolean> actionColumn;
+
     @FXML private TableView<User> myFriends;
     @FXML private TableColumn<User, String> friendLogin;
     @FXML private TableColumn<User, String> friendName;
     @FXML private TableColumn<User, String> friendSurname;
     @FXML private TableColumn<User, String> friendPhoneNumber;
 
+    @FXML private TableView<Meeting> myMeetings;
+    @FXML private TableColumn<Meeting, String>  meetingLocationColumn;
+    @FXML private TableColumn<Meeting, Date>  meetingStartTimeColumn;
+    @FXML private TableColumn<Meeting, Date>  meetingEndTimeColumn;
+    @FXML private TableColumn<Meeting, User>  meetingParticipants;
+
+    @FXML private TextField addLocation;
+    @FXML private TextField addStartTime;
+    @FXML private TextField addEndTime;
+
     @Override
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         initUsersColumn();
         initMyFriendsColumn();
-        // define a simple boolean cell value for the action column so that the column will only be shown for non-empty rows.
-        actionColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, Boolean>, ObservableValue<Boolean>>() {
-            @Override public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<User, Boolean> features) {
-                return new SimpleBooleanProperty(features.getValue() != null);
-            }
-        });
-        // create a cell value factory with an add button for each row in the table.
-        actionColumn.setCellFactory(new Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>>() {
-            @Override public TableCell<User, Boolean> call(TableColumn<User, Boolean> personBooleanTableColumn) {
-                return new AddPersonCell(allUsers, myAccount);
-            }
-        });
+        initMyMeetingsColumn();
     }
 
     public void initUserList(){
       allUsers.setItems(usersService.getAllUsers());
-      allUsers.setItems(myAccount.getFriends());
+      myFriends.setItems(myAccount.getFriends());
+      myMeetings.setItems(meetingService.getAllEvents());
     }
 
     private void initUsersColumn() {
@@ -95,6 +90,15 @@ public class DashboardController implements Initializable{
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        actionColumn.setCellValueFactory(features -> new SimpleBooleanProperty(features.getValue() != null));
+        actionColumn.setCellFactory(personBooleanTableColumn -> new AddFriendTask(allUsers, myAccount));
+    }
+
+    private void initMyMeetingsColumn() {
+        meetingLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        meetingStartTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        meetingEndTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        meetingParticipants.setCellValueFactory(new PropertyValueFactory<>("usersInMeeting"));
     }
 
     private void initMyFriendsColumn(){
@@ -104,55 +108,23 @@ public class DashboardController implements Initializable{
         friendPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
-    /** A table cell containing a button for adding a new person. */
-    private class AddPersonCell extends TableCell<User, Boolean> {
-        // a button for adding a new person.
-        final Button addButton       = new Button("Add");
-        // pads and centers the add button in the cell.
-        final StackPane paddedButton = new StackPane();
-        // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
-        final DoubleProperty buttonY = new SimpleDoubleProperty();
+    public void addEvent(){
 
-        /**
-         * AddPersonCell constructor
-         * @param table the table to which a new person can be added.
-         */
-        AddPersonCell(final TableView table) {
-            paddedButton.setPadding(new Insets(3));
-            paddedButton.getChildren().add(addButton);
-            addButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override public void handle(MouseEvent mouseEvent) {
-                    buttonY.set(mouseEvent.getScreenY());
-                    myAccount.getFriends().add((User)table.getSelectionModel().getSelectedItem());
-                    //System.out.println(myAccount.getFriends().toString());
-                }
-            });
-            addButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override public void handle(ActionEvent actionEvent) {
-                }
-            });
-        }
+        Meeting meeting = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime startTime = LocalDateTime.parse(addStartTime.getText(), formatter);
+        LocalDateTime endTime = LocalDateTime.parse(addEndTime.getText(), formatter);
 
-        /** places an add button in the row only if the row is not empty. */
-        @Override protected void updateItem(Boolean item, boolean empty) {
-            super.updateItem(item, empty);
-            if (!empty) {
-                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                setGraphic(paddedButton);
-            } else {
-                setGraphic(null);
-            }
-        }
+        if(checkDateTime())
+            meeting.setStartTime(startTime);
+
+        meetingService.createEvent(meeting);
+
+    }
+private boolean checkDateTime(){
+
+       return FieldValidator.isDateTimeValid(addStartTime.getText())
+               && FieldValidator.isDateTimeValid(addEndTime.getText());
     }
 
-    /**
-     * shows a dialog which displays a UI for adding a person to a table.
-     * @param parent a parent stage to which this dialog will be modal and placed next to.
-     * @param table the table to which a person is to be added.
-     * @param y the y position of the top left corner of the dialog.
-     */
-    private void addFriend(Stage parent, final TableView<User> table, double y) {
-
-        //table.getSelectionModel().select(getTableRow().getIndex());
-    }
 }
