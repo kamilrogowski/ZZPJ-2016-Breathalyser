@@ -1,6 +1,5 @@
 package zzpj.breathalyser.service;
 
-import com.sun.istack.internal.NotNull;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,7 @@ public class UsersService implements IUsersService {
         usersRepository.initializeUsers();
     }
 
-    public boolean addUser(@NotNull User user) {
+    public boolean addUser(User user) {
         if (!usersRepository.getUsers().contains(user)) {
             usersRepository.addUser(user);
             log.info("User: " + user.getLogin() + " has been created");
@@ -32,7 +31,7 @@ public class UsersService implements IUsersService {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findByLogin(String login){
         for (User userFound : usersRepository.getUsers()) {
 
             if (userFound.getLogin().equals(login)) {
