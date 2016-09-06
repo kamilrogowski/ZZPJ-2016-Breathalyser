@@ -18,6 +18,5 @@ public interface IUsersService {
     User onLogin(String login, String password);
     ObservableList<User> getAllUsers();
     User findByLogin(String login);
-    List<User> findMyFriends(User myAccount);
 
 }

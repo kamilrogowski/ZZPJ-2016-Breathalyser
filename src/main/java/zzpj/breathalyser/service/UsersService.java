@@ -49,11 +49,6 @@ public class UsersService implements IUsersService {
 
 
     @Override
-    public List<User> findMyFriends(User myAccount) {
-       return myAccount.getFriends();
-    }
-
-    @Override
     public User onLogin(String login, String password) {
 
         for (User userToCheck : usersRepository.getUsers()) {

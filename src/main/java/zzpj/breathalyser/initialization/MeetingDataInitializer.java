@@ -8,6 +8,7 @@ import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,8 +34,8 @@ public class MeetingDataInitializer {
 
     private Meeting generateMeetingData(int i) {
         String location = "location " + i;
-        LocalDate today = LocalDate.now();
-        LocalDate endTime = today.plusDays(i);
+        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime endTime = today.plusDays(i);
         participants.add(new UserDataInitializer().generateUser(i));
         return new Meeting(location, today, endTime, participants);
     }
