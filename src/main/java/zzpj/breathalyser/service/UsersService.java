@@ -41,6 +41,26 @@ public class UsersService implements IUsersService {
         return null;
     }
 
+    @Override
+    public boolean addUserToEvent(User user) {
+        if (!usersRepository.getUsersToEvent().contains(user)) {
+            usersRepository.addUserToEvent(user);
+            log.info("User: " + user.getLogin() + " has been added to event");
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public ObservableList<User> getUsersToEvent() {
+        return usersRepository.getUsersToEvent();
+    }
+
+    @Override
+    public void removeUserFromEvent(User user) {
+         usersRepository.removeUserFromEvent(user);
+    }
+
 
     @Override
     public User onLogin(String login, String password) {

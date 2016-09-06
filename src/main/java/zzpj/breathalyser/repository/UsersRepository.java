@@ -14,8 +14,10 @@ public class UsersRepository implements IUsersRepository {
 
     private ObservableList<User> users;
     private UserDataInitializer userDataInitializer;
+    private ObservableList<User> usersAvailableToEvent;
 
     public UsersRepository() {
+        usersAvailableToEvent = FXCollections.observableArrayList();
         userDataInitializer = new UserDataInitializer();
         users = FXCollections.observableArrayList();
     }
@@ -36,6 +38,21 @@ public class UsersRepository implements IUsersRepository {
 
     public ObservableList<User> getUsers() {
         return users;
+    }
+
+    @Override
+    public void addUserToEvent(User user) {
+        usersAvailableToEvent.add(user);
+    }
+
+    @Override
+    public ObservableList<User> getUsersToEvent() {
+        return usersAvailableToEvent;
+    }
+
+    @Override
+    public void removeUserFromEvent(User user) {
+     usersAvailableToEvent.remove(user);
     }
 
 }

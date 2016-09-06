@@ -17,9 +17,13 @@ public class Meeting {
     private LocalDateTime endTime;
     private ObservableList<User> usersInMeeting = FXCollections.observableArrayList();
 
+    public Meeting() {
+    }
+
     public Meeting(String location, LocalDateTime today, LocalDateTime endTime, ObservableList<User> participants) {
         this.location = location;
         this.startTime = today;
+
         this.endTime = endTime;
         this.usersInMeeting = participants;
     }

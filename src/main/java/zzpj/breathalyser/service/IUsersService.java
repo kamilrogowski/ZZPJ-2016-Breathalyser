@@ -12,5 +12,8 @@ public interface IUsersService {
     User onLogin(String login, String password);
     ObservableList<User> getAllUsers();
     User findByLogin(String login);
+    boolean addUserToEvent(User user);
+    ObservableList<User> getUsersToEvent();
+    void removeUserFromEvent(User user);
 
 }

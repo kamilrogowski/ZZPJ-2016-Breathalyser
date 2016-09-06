@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import lombok.extern.java.Log;
 import zzpj.breathalyser.model.User;
+import zzpj.breathalyser.service.IUsersService;
 
 @Log
 public class AddFriendTask extends TableCell<User, Boolean> {
@@ -20,15 +21,13 @@ public class AddFriendTask extends TableCell<User, Boolean> {
     final StackPane paddedButton = new StackPane();
     final DoubleProperty buttonY = new SimpleDoubleProperty();
 
-    public AddFriendTask(final TableView table, User currentAccount) {
+    public AddFriendTask(final TableView table, User currentAccount, IUsersService usersService, TableView<User> events) {
         paddedButton.setPadding(new Insets(3));
         paddedButton.getChildren().add(addButton);
         addButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 buttonY.set(mouseEvent.getScreenY());
-                //currentAccount.getFriends().add((User)table.getSelectionModel().getSelectedItem());
-                //System.out.println(currentAccount.getFriends().toString());
             }
         });
         addButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -36,8 +35,12 @@ public class AddFriendTask extends TableCell<User, Boolean> {
             public void handle(ActionEvent actionEvent) {
                 table.getSelectionModel().setCellSelectionEnabled(true);
                 User user = (User) table.getSelectionModel().getSelectedItem();
-                currentAccount.getFriends().add(user);
-                log.info(currentAccount.getFriends().toString());
+                if(!currentAccount.getFriends().contains(user)){
+                    currentAccount.getFriends().add(user);
+                    usersService.addUserToEvent(user);
+                    events.setItems(usersService.getUsersToEvent());
+                    log.info(currentAccount.getFriends().toString());
+                }
             }
         });
     }

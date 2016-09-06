@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 @Log
-public class DashboardController implements Initializable{
+public class DashboardController implements Initializable {
 
     @Setter
     private IUsersService usersService;
@@ -39,8 +39,7 @@ public class DashboardController implements Initializable{
     /**
      * TODO Field for user login
      */
-    @FXML
-    private Text loginMessage;
+    @FXML private Text loginMessage;
 
     @FXML private TableView<User> allUsers;
     @FXML private TableColumn<User, String> loginColumn;
@@ -53,17 +52,21 @@ public class DashboardController implements Initializable{
     @FXML private TableColumn<User, String> friendLogin;
     @FXML private TableColumn<User, String> friendName;
     @FXML private TableColumn<User, String> friendSurname;
-    @FXML private TableColumn<User, String> friendPhoneNumber;
 
     @FXML private TableView<Meeting> myMeetings;
-    @FXML private TableColumn<Meeting, String>  meetingLocationColumn;
-    @FXML private TableColumn<Meeting, Date>  meetingStartTimeColumn;
-    @FXML private TableColumn<Meeting, Date>  meetingEndTimeColumn;
-    @FXML private TableColumn<Meeting, User>  meetingParticipants;
+    @FXML private TableColumn<Meeting, String> meetingLocationColumn;
+    @FXML private TableColumn<Meeting, Date> meetingStartTimeColumn;
+    @FXML private TableColumn<Meeting, Date> meetingEndTimeColumn;
+    @FXML private TableColumn<Meeting, User> meetingParticipants;
 
     @FXML private TextField addLocation;
     @FXML private TextField addStartTime;
     @FXML private TextField addEndTime;
+
+    @FXML private TableView<User> friendsInEvents;
+    @FXML private TableColumn<User, String> eventUserName;
+    @FXML private TableColumn<User, String> eventUserSurname;
+
 
     @Override
     @FXML
@@ -71,12 +74,13 @@ public class DashboardController implements Initializable{
         initUsersColumn();
         initMyFriendsColumn();
         initMyMeetingsColumn();
+        initFriendsInEvents();
     }
 
-    public void initUserList(){
-      allUsers.setItems(usersService.getAllUsers());
-      myFriends.setItems(myAccount.getFriends());
-      myMeetings.setItems(meetingService.getAllEvents());
+    public void initUserList() {
+        allUsers.setItems(usersService.getAllUsers());
+        myFriends.setItems(myAccount.getFriends());
+        myMeetings.setItems(meetingService.getAllEvents());
     }
 
     private void initUsersColumn() {
@@ -85,7 +89,7 @@ public class DashboardController implements Initializable{
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         actionColumn.setCellValueFactory(features -> new SimpleBooleanProperty(features.getValue() != null));
-        actionColumn.setCellFactory(personBooleanTableColumn -> new AddFriendTask(allUsers, myAccount));
+        actionColumn.setCellFactory(personBooleanTableColumn -> new AddFriendTask(allUsers, myAccount, usersService,friendsInEvents));
     }
 
     private void initMyMeetingsColumn() {
@@ -95,30 +99,36 @@ public class DashboardController implements Initializable{
         meetingParticipants.setCellValueFactory(new PropertyValueFactory<>("usersInMeeting"));
     }
 
-    private void initMyFriendsColumn(){
-        friendLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
+    private void initMyFriendsColumn() {
         friendName.setCellValueFactory(new PropertyValueFactory<>("name"));
         friendSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        friendPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        friendLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
     }
 
-    public void addEvent(){
+    public void addEvent() {
 
-        Meeting meeting = null;
+        Meeting meeting = new Meeting();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime startTime = LocalDateTime.parse(addStartTime.getText(), formatter);
         LocalDateTime endTime = LocalDateTime.parse(addEndTime.getText(), formatter);
 
-        if(checkDateTime())
+        if (checkDateTime()) {
             meeting.setStartTime(startTime);
-
-        meetingService.createEvent(meeting);
-
+            meeting.setEndTime(endTime);
+            meetingService.createEvent(meeting);
+        }
     }
-private boolean checkDateTime(){
 
-       return FieldValidator.isDateTimeValid(addStartTime.getText())
-               && FieldValidator.isDateTimeValid(addEndTime.getText());
+    private void initFriendsInEvents() {
+        eventUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        eventUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+    }
+
+
+    private boolean checkDateTime() {
+
+        return FieldValidator.isDateTimeValid(addStartTime.getText())
+                && FieldValidator.isDateTimeValid(addEndTime.getText());
     }
 
 }
