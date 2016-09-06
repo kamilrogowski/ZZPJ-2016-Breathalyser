@@ -1,8 +1,5 @@
 package zzpj.breathalyser.controller;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -15,7 +12,6 @@ import zzpj.breathalyser.Utils.FieldValidator;
 import zzpj.breathalyser.Utils.ValidationMessageSuffix;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
-import zzpj.breathalyser.repository.IUsersRepository;
 import zzpj.breathalyser.service.IUsersService;
 
 /**

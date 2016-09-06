@@ -1,7 +1,6 @@
 package zzpj.breathalyser.service;
 
 import com.sun.istack.internal.NotNull;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,10 +8,6 @@ import lombok.extern.java.Log;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.repository.IUsersRepository;
 import zzpj.breathalyser.repository.UsersRepository;
-
-import javax.inject.Inject;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Kamil Rogowski on 28.08.2016.

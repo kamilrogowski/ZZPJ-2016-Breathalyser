@@ -1,7 +1,5 @@
 package zzpj.breathalyser.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import lombok.Data;
 
 

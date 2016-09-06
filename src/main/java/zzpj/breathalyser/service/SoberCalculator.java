@@ -5,11 +5,11 @@
  */
 package zzpj.breathalyser.service;
 
-import java.util.*;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.DoubleProperty;
 import zzpj.breathalyser.model.Drink;
 import zzpj.breathalyser.model.UserDetails;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

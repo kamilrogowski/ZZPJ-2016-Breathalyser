@@ -1,7 +1,5 @@
 package zzpj.breathalyser.Utils;
 
-import java.util.regex.Pattern;
-
 public class FieldValidator {
 
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm";

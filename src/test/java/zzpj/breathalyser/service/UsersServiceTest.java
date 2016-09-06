@@ -7,8 +7,6 @@ import zzpj.breathalyser.model.UserDetails;
 import zzpj.breathalyser.repository.IUsersRepository;
 import zzpj.breathalyser.repository.UsersRepository;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Krzychu on 29.08.2016.
  */

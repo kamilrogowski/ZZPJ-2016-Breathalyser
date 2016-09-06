@@ -5,12 +5,8 @@ import javafx.collections.ObservableList;
 import lombok.extern.java.Log;
 import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.model.User;
-import zzpj.breathalyser.model.UserDetails;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Magda Wojnarowicz on 04.09.2016.

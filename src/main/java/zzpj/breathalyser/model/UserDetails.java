@@ -1,6 +1,5 @@
 package zzpj.breathalyser.model;
 
-import javafx.beans.property.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

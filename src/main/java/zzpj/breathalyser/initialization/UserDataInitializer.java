@@ -1,14 +1,9 @@
 package zzpj.breathalyser.initialization;
 
-import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Kamil Rogowski on 27.08.2016.

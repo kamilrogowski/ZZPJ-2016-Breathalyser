@@ -3,8 +3,6 @@ package zzpj.breathalyser.initialization;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Krzychu on 29.08.2016.
  */

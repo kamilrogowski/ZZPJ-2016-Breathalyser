@@ -1,34 +1,28 @@
 package zzpj.breathalyser.controller;
 
 
-import com.sun.javafx.css.converters.StringConverter;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.beans.property.*;
-import javafx.util.converter.DateTimeStringConverter;
-import javafx.util.converter.LocalDateTimeStringConverter;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import zzpj.breathalyser.Utils.FieldValidator;
 import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
-import zzpj.breathalyser.repository.IMeetingRepository;
 import zzpj.breathalyser.service.IMeetingService;
 import zzpj.breathalyser.service.IUsersService;
 import zzpj.breathalyser.tasks.AddFriendTask;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
 @Log

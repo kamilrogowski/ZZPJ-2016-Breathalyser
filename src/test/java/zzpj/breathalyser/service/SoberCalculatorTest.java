@@ -4,9 +4,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import zzpj.breathalyser.model.*;
-
-import static org.junit.Assert.*;
+import zzpj.breathalyser.model.Drink;
+import zzpj.breathalyser.model.UserDetails;
 
 /**
  * Created by Krzychu on 28.08.2016.

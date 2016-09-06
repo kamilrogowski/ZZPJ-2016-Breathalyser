@@ -1,11 +1,8 @@
 package zzpj.breathalyser.repository;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lombok.extern.apachecommons.CommonsLog;
 import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import zzpj.breathalyser.initialization.UserDataInitializer;
 import zzpj.breathalyser.model.User;
 

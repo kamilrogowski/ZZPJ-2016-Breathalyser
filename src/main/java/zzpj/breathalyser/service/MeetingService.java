@@ -1,14 +1,9 @@
 package zzpj.breathalyser.service;
 
 import javafx.collections.ObservableList;
-import lombok.Getter;
-import lombok.Setter;
-import zzpj.breathalyser.initialization.MeetingDataInitializer;
 import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.repository.IMeetingRepository;
 import zzpj.breathalyser.repository.MeetingRepository;
-
-import java.util.List;
 
 /**
  * Created by Magda Wojnarowicz on 04.09.2016.

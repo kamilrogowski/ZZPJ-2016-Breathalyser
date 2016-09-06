@@ -1,6 +1,5 @@
 package zzpj.breathalyser.repository;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import zzpj.breathalyser.model.User;
 

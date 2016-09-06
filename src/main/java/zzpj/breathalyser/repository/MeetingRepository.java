@@ -4,10 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import zzpj.breathalyser.initialization.MeetingDataInitializer;
 import zzpj.breathalyser.model.Meeting;
-import zzpj.breathalyser.service.IMeetingService;
-
-import java.util.List;
-import java.util.Observable;
 
 /**
  * Created by Magda Wojnarowicz on 04.09.2016.

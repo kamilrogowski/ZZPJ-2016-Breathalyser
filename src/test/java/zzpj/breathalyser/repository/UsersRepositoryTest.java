@@ -2,9 +2,8 @@ package zzpj.breathalyser.repository;
 
 import org.junit.Assert;
 import org.junit.Test;
-import zzpj.breathalyser.model.*;
-
-import static org.junit.Assert.*;
+import zzpj.breathalyser.model.User;
+import zzpj.breathalyser.model.UserDetails;
 
 /**
  * Created by Krzychu on 29.08.2016.
