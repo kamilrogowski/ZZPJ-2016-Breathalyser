@@ -51,18 +51,20 @@
                   <TableColumn fx:id="eventUserSurname" prefWidth="75.0" text="surname" />
               </columns>
           </TableView>
-          <TableView fx:id="drinks" layoutX="18.0" layoutY="490.0" prefHeight="200.0" prefWidth="250.0">
+          <TableView fx:id="drinks" layoutX="18.0" layoutY="490.0" prefHeight="200.0" prefWidth="325.0">
               <columns>
                   <TableColumn fx:id="nameOfDrinkColumn" prefWidth="100.0" text="nameOfDrink" />
                   <TableColumn fx:id="volumeOfDrinkInMlColumn" prefWidth="75.0" text="volumeInMl" />
                   <TableColumn fx:id="percentageOfEthanolInDrinkColumn" prefWidth="75.0" text="percentage" />
+                  <TableColumn fx:id="removeColumn" prefWidth="75.0" text="remove" />
               </columns>
           </TableView>
           <TextField fx:id="nameOfDrink" layoutX="18.0" layoutY="450.0" promptText="name" />
           <TextField fx:id="volumeInMl" layoutX="180.0" layoutY="450.0" promptText="ml" />
           <TextField fx:id="percentage" layoutX="342.0" layoutY="450.0" promptText="percents" />
           <Button fx:id="addBButton" layoutX="550.0" layoutY="450.0" mnemonicParsing="false" text="Add drink" onAction="#addDrink" />
-          <TextField fx:id="permille" layoutX="342.0" layoutY="600.0" promptText="permille" />
+          <Button fx:id="calcBButton" layoutX="550.0" layoutY="500.0" mnemonicParsing="false" text="Calculate permilles" onAction="#calculatePermilles" />
+          <TextField fx:id="permille" layoutX="342.0" layoutY="500.0" promptText="permille" />
           <Separator layoutX="7.0" layoutY="178.0" prefHeight="25.0" prefWidth="921.0" />
           <!--<TableView fx:id="meetings" layoutX="347.0" layoutY="295.0" prefHeight="175.0" prefWidth="563.0">-->
               <!--<columns>-->

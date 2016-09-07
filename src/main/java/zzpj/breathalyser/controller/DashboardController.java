@@ -21,6 +21,7 @@ import zzpj.breathalyser.service.IMeetingService;
 import zzpj.breathalyser.service.IUsersService;
 import zzpj.breathalyser.service.SoberCalculator;
 import zzpj.breathalyser.tasks.AddFriendTask;
+import zzpj.breathalyser.tasks.RemoveDrinkTask;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -74,10 +75,11 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<User, String> eventUserName;
     @FXML private TableColumn<User, String> eventUserSurname;
 
-    @FXML private TableView<User> drinks;
+    @FXML private TableView<Drink> drinks;
     @FXML private TableColumn<Drink, String> nameOfDrinkColumn;
     @FXML private TableColumn<Drink, Double> volumeOfDrinkInMlColumn;
     @FXML private TableColumn<Drink, Double> percentageOfEthanolInDrinkColumn;
+    @FXML private TableColumn<Drink, Boolean> removeColumn;
 
     @FXML private TextField nameOfDrink;
     @FXML private TextField volumeInMl;
@@ -158,9 +160,18 @@ public class DashboardController implements Initializable {
     public void addDrink(){
         Drink drink = new Drink(nameOfDrink.getText(), new Double(volumeInMl.getText()), new Double(percentage.getText()));
         calculator.addDrinkToListOfDrink(drink);
+        nameOfDrinkColumn.setCellValueFactory(new PropertyValueFactory<Drink, String>("nameOfDrink"));
+        volumeOfDrinkInMlColumn.setCellValueFactory(new PropertyValueFactory<Drink, Double>("volumeOfDrinkInMl"));
+        percentageOfEthanolInDrinkColumn.setCellValueFactory(new PropertyValueFactory<Drink, Double>("percentageOfEthanolInDrink"));
+        removeColumn.setCellFactory(drinkBooleanTableColumn -> new RemoveDrinkTask(drinks, myAccount, usersService, this.calculator));
+        drinks.setItems(calculator.getListOfDrink());
+    }
+
+    public void calculatePermilles(){
         double drinkingPeriodInHours = ChronoUnit.HOURS.between(meetingService.getAllEvents().get(myMeetings.getSelectionModel().getSelectedIndex()).getStartTime(),  meetingService.getAllEvents().get(myMeetings.getSelectionModel().getSelectedIndex()).getEndTime());
         Double currentPermille = calculator.getEstimatedPeakBloodAlcoholConcentration(myAccount.getUserDetails(), drinkingPeriodInHours);
-        permille.setText(currentPermille.toString());
+        if(currentPermille>=0)permille.setText(currentPermille.toString());
+        else permille.setText("0.0");
     }
 
 }

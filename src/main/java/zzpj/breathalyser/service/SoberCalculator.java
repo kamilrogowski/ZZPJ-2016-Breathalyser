@@ -5,7 +5,10 @@
  */
 package zzpj.breathalyser.service;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import zzpj.breathalyser.model.Drink;
+import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
 
 import java.util.ArrayList;
@@ -26,21 +29,20 @@ public class SoberCalculator {
     private double estimatedPeakBloodAlcoholConcentrationInPermilles;
     private final double factorToConvertTheAmountInGramsToSwedishStandards = 1.2;
 
-    public List<Drink> getListOfDrink() {
+    public ObservableList<Drink> getListOfDrink() {
         return listOfDrink;
     }
 
-    public void setListOfDrink(List<Drink> listOfDrink) {
+    public void setListOfDrink(ObservableList<Drink> listOfDrink) {
         this.listOfDrink = listOfDrink;
     }
 
-    private List<Drink> listOfDrink;
+    private ObservableList<Drink> listOfDrink = FXCollections.observableArrayList();;
 
     public SoberCalculator(){
         numberOfStandardDrinksContaining10gramsOfEthanol = 0.0;
         massOfEthanolInGrams = 0.0;
         estimatedPeakBloodAlcoholConcentrationInPermilles = 0.0;
-        listOfDrink = new ArrayList();
     }
 
     public double getMassOfEthanolInDrinkInGrams(List<Drink> listOfDrink){
@@ -64,6 +66,8 @@ public class SoberCalculator {
         estimatedPeakBloodAlcoholConcentrationInPermilles = ((this.constantForBodyWaterInTheBlood*this.getNumberOfStandardDrinksContaining10gramsOfEthanol()*this.factorToConvertTheAmountInGramsToSwedishStandards)
                 /(userDetails.getBodyWaterConstant()*userDetails.getWeight())
                 -(this.metabolicConstant*drinkingPeriodInHours))*10;
+        numberOfStandardDrinksContaining10gramsOfEthanol = 0.0;
+        massOfEthanolInGrams = 0.0;
         return estimatedPeakBloodAlcoholConcentrationInPermilles;
     }
 
