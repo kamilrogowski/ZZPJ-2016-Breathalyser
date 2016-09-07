@@ -131,6 +131,7 @@ public class DashboardController implements Initializable {
     private void initTopScoresColumn(){
         scoreColumn.setCellValueFactory(new PropertyValueFactory<Score, Double>("scoreValue"));
         userColumn.setCellValueFactory(new PropertyValueFactory<Score, User>("userScore"));
+        scoreColumn.setSortType(TableColumn.SortType.ASCENDING);
     }
 
     public void addEvent() {
@@ -198,6 +199,7 @@ public class DashboardController implements Initializable {
         scoreColumn.setCellValueFactory(new PropertyValueFactory<Score, Double>("scoreValue"));
         userColumn.setCellValueFactory(new PropertyValueFactory<Score, User>("userScore"));
         topScores.setItems(scoreService.getScores());
+        topScores.getSortOrder().add(scoreColumn);
     }
 
 }
