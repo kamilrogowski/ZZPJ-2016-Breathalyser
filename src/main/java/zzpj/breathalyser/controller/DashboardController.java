@@ -5,22 +5,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-<<<<<<< HEAD
 import javafx.scene.control.*;
-=======
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
->>>>>>> aa6db9c01c9ccddcc54f65e985e700656b06b31d
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import lombok.Setter;
 import lombok.extern.java.Log;
-<<<<<<< HEAD
-=======
-import zzpj.breathalyser.Utils.FieldValidator;
->>>>>>> aa6db9c01c9ccddcc54f65e985e700656b06b31d
 import zzpj.breathalyser.model.Drink;
 import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.model.User;
@@ -50,8 +39,6 @@ public class DashboardController implements Initializable {
     @Setter
     private User myAccount;
 
-    @Setter
-    private SoberCalculator calculator = new SoberCalculator();;
     /**
      * TODO Field for user login
      */
@@ -83,28 +70,19 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<User, String> eventUserName;
     @FXML private TableColumn<User, String> eventUserSurname;
 
-<<<<<<< HEAD
-    @FXML private TableView<User> drinks;
-    @FXML private TableColumn<Drink, String> nameOfDrinkColumn;
-    @FXML private TableColumn<Drink, Double> volumeOfDrinkInMlColumn;
-    @FXML private TableColumn<Drink, Double> percentageOfEthanolInDrinkColumn;
-=======
+
     @FXML private TableView<Drink> drinks;
     @FXML private TableColumn<Drink, String> nameOfDrinkColumn;
     @FXML private TableColumn<Drink, Double> volumeOfDrinkInMlColumn;
     @FXML private TableColumn<Drink, Double> percentageOfEthanolInDrinkColumn;
     @FXML private TableColumn<Drink, Boolean> removeColumn;
->>>>>>> aa6db9c01c9ccddcc54f65e985e700656b06b31d
 
     @FXML private TextField nameOfDrink;
     @FXML private TextField volumeInMl;
     @FXML private TextField percentage;
 
     @FXML private TextField permille;
-<<<<<<< HEAD
     SoberCalculator calculator = new SoberCalculator();
-=======
->>>>>>> aa6db9c01c9ccddcc54f65e985e700656b06b31d
 
     @Override
     @FXML
@@ -176,22 +154,6 @@ public class DashboardController implements Initializable {
         eventUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         friendsInEvents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
-
-
-    private void initDrinksColumn() {
-        nameOfDrinkColumn.setCellValueFactory(new PropertyValueFactory<>("nameOfDrink"));
-        volumeOfDrinkInMlColumn.setCellValueFactory(new PropertyValueFactory<>("volumeOfDrinkInMl"));
-        percentageOfEthanolInDrinkColumn.setCellValueFactory(new PropertyValueFactory<>("percentageOfEthanolInDrinkC"));
-    }
-
-    public void addDrink(){
-        Drink drink = new Drink(nameOfDrink.getText(), new Double(volumeInMl.getText()), new Double(percentage.getText()));
-        calculator.addDrinkToListOfDrink(drink);
-        double drinkingPeriodInHours = ChronoUnit.HOURS.between(meetingService.getAllEvents().get(myMeetings.getSelectionModel().getSelectedIndex()).getStartTime(),  meetingService.getAllEvents().get(myMeetings.getSelectionModel().getSelectedIndex()).getEndTime());
-        Double currentPermille = calculator.getEstimatedPeakBloodAlcoholConcentration(myAccount.getUserDetails(), drinkingPeriodInHours);
-        permille.setText(currentPermille.toString());
-    }
-
     private void initDrinksColumn() {
         nameOfDrinkColumn.setCellValueFactory(new PropertyValueFactory<>("nameOfDrink"));
         volumeOfDrinkInMlColumn.setCellValueFactory(new PropertyValueFactory<>("volumeOfDrinkInMl"));
