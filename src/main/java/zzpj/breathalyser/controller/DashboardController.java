@@ -15,6 +15,7 @@ import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
 import zzpj.breathalyser.service.IMeetingService;
+import zzpj.breathalyser.service.IScoreService;
 import zzpj.breathalyser.service.IUsersService;
 import zzpj.breathalyser.service.SoberCalculator;
 import zzpj.breathalyser.tasks.AddFriendTask;
@@ -35,6 +36,9 @@ public class DashboardController implements Initializable {
 
     @Setter
     private IMeetingService meetingService;
+
+    @Setter
+    private IScoreService scoreService;
 
     @Setter
     private User myAccount;
@@ -175,6 +179,7 @@ public class DashboardController implements Initializable {
         Double currentPermille = calculator.getEstimatedPeakBloodAlcoholConcentration(myAccount.getUserDetails(), drinkingPeriodInHours);
         if(currentPermille>=0)permille.setText(currentPermille.toString());
         else permille.setText("0.0");
+        scoreService.getScores();
     }
 
 }

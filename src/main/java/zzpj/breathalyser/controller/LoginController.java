@@ -11,10 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import zzpj.breathalyser.Utils.ValidationMessageSuffix;
 import zzpj.breathalyser.model.User;
-import zzpj.breathalyser.service.IMeetingService;
-import zzpj.breathalyser.service.IUsersService;
-import zzpj.breathalyser.service.MeetingService;
-import zzpj.breathalyser.service.UsersService;
+import zzpj.breathalyser.service.*;
 
 import java.io.IOException;
 
@@ -22,7 +19,7 @@ public class LoginController {
 
     private IUsersService usersService;
     private IMeetingService meetingService;
-
+    private IScoreService scoreService;
     @FXML
     private TextField userLogin;
     @FXML
@@ -34,7 +31,7 @@ public class LoginController {
         usersService = new UsersService();
         usersService.initializeUsers();
         meetingService = new MeetingService();
-
+        scoreService = new ScoreService();
     }
 
     public void onLogin() throws IOException {
@@ -65,6 +62,7 @@ public class LoginController {
         dashboardController.setMyAccount(user);
         dashboardController.setUsersService(usersService);
         dashboardController.setMeetingService(meetingService);
+        dashboardController.setScoreService(scoreService);
         dashboardController.initUserList();
         Scene newScene = new Scene(root);
         Stage newStage = new Stage();
