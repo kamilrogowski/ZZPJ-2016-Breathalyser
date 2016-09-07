@@ -10,10 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import zzpj.breathalyser.model.Drink;
-import zzpj.breathalyser.model.Meeting;
-import zzpj.breathalyser.model.User;
-import zzpj.breathalyser.model.UserDetails;
+import zzpj.breathalyser.model.*;
 import zzpj.breathalyser.service.IMeetingService;
 import zzpj.breathalyser.service.IScoreService;
 import zzpj.breathalyser.service.IUsersService;
@@ -88,6 +85,10 @@ public class DashboardController implements Initializable {
     @FXML private TextField permille;
     SoberCalculator calculator = new SoberCalculator();
 
+    @FXML private TableView<Score> topScores;
+    @FXML private TableColumn<Score, Double> scoreColumn;
+    @FXML private TableColumn<Score, User> userColumn;
+
     @Override
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,6 +97,7 @@ public class DashboardController implements Initializable {
         initMyMeetingsColumn();
         initFriendsInEvents();
         initDrinksColumn();
+        initTopScoresColumn();
     }
 
     public void initUserList() {
@@ -124,6 +126,11 @@ public class DashboardController implements Initializable {
         friendName.setCellValueFactory(new PropertyValueFactory<>("name"));
         friendSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         friendLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
+    }
+
+    private void initTopScoresColumn(){
+        scoreColumn.setCellValueFactory(new PropertyValueFactory<Score, Double>("scoreValue"));
+        userColumn.setCellValueFactory(new PropertyValueFactory<Score, User>("userScore"));
     }
 
     public void addEvent() {
@@ -179,7 +186,18 @@ public class DashboardController implements Initializable {
         Double currentPermille = calculator.getEstimatedPeakBloodAlcoholConcentration(myAccount.getUserDetails(), drinkingPeriodInHours);
         if(currentPermille>=0)permille.setText(currentPermille.toString());
         else permille.setText("0.0");
-        scoreService.getScores();
+        Score score = new Score();
+        score.setScoreValue(currentPermille);
+        score.setUserScore(myAccount);
+        scoreService.addScore(score);
+        //scoreService.getScores();
+        showScore();
+    }
+
+    public void showScore(){
+        scoreColumn.setCellValueFactory(new PropertyValueFactory<Score, Double>("scoreValue"));
+        userColumn.setCellValueFactory(new PropertyValueFactory<Score, User>("userScore"));
+        topScores.setItems(scoreService.getScores());
     }
 
 }

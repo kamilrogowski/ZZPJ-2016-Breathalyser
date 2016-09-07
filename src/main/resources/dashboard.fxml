@@ -66,6 +66,12 @@
           <Button fx:id="calcBButton" layoutX="550.0" layoutY="500.0" mnemonicParsing="false" text="Calculate permilles" onAction="#calculatePermilles" />
           <TextField fx:id="permille" layoutX="342.0" layoutY="500.0" promptText="permille" />
           <Separator layoutX="7.0" layoutY="178.0" prefHeight="25.0" prefWidth="921.0" />
+          <TableView fx:id="topScores" layoutX="500.0" layoutY="550.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                  <TableColumn fx:id="userColumn" prefWidth="100.0" text="user" />
+                  <TableColumn fx:id="scoreColumn" prefWidth="100.0" text="score" />
+              </columns>
+          </TableView>
           <!--<TableView fx:id="meetings" layoutX="347.0" layoutY="295.0" prefHeight="175.0" prefWidth="563.0">-->
               <!--<columns>-->
                   <!--<TableColumn fx:id="locationColumn" prefWidth="145.0" text="location" />-->
