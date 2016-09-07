@@ -35,10 +35,10 @@ public class AddFriendTask extends TableCell<User, Boolean> {
             public void handle(ActionEvent actionEvent) {
                 table.getSelectionModel().setCellSelectionEnabled(true);
                 User user = (User) table.getSelectionModel().getSelectedItem();
-                if(!currentAccount.getFriends().contains(user)){
+                if(user != null && !currentAccount.getFriends().contains(user)){
                     currentAccount.getFriends().add(user);
-                    usersService.addUserToEvent(user);
-                    events.setItems(usersService.getUsersToEvent());
+                    usersService.addUserAvaiableToEvent(user);
+                    events.setItems(usersService.getUsersAvailableToEvent());
                     log.info(currentAccount.getFriends().toString());
                 }
             }

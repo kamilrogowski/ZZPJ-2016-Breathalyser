@@ -42,7 +42,7 @@ public class UsersService implements IUsersService {
     }
 
     @Override
-    public boolean addUserToEvent(User user) {
+    public boolean addUserAvaiableToEvent(User user) {
         if (!usersRepository.getUsersToEvent().contains(user)) {
             usersRepository.addUserToEvent(user);
             log.info("User: " + user.getLogin() + " has been added to event");
@@ -52,12 +52,12 @@ public class UsersService implements IUsersService {
     }
 
     @Override
-    public ObservableList<User> getUsersToEvent() {
+    public ObservableList<User> getUsersAvailableToEvent() {
         return usersRepository.getUsersToEvent();
     }
 
     @Override
-    public void removeUserFromEvent(User user) {
+    public void removeUserAvailableFromEvent(User user) {
          usersRepository.removeUserFromEvent(user);
     }
 

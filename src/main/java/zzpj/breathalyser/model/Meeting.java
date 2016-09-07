@@ -23,7 +23,6 @@ public class Meeting {
     public Meeting(String location, LocalDateTime today, LocalDateTime endTime, ObservableList<User> participants) {
         this.location = location;
         this.startTime = today;
-
         this.endTime = endTime;
         this.usersInMeeting = participants;
     }

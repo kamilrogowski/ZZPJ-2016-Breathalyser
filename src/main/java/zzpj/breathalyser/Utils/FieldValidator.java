@@ -1,8 +1,11 @@
 package zzpj.breathalyser.Utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FieldValidator {
 
-    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm";
+
 
     public static boolean passordMatch(String password, String repeatedPassword) {
 
@@ -23,8 +26,4 @@ public class FieldValidator {
         }
     }
 
-    public static boolean isDateTimeValid(String stringToCheck) {
-
-        return stringToCheck.matches(DATETIME_FORMAT);
-    }
 }

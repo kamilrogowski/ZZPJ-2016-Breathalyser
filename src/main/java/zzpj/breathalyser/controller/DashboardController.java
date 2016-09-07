@@ -2,26 +2,27 @@ package zzpj.breathalyser.controller;
 
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import zzpj.breathalyser.Utils.FieldValidator;
+import zzpj.breathalyser.model.Drink;
 import zzpj.breathalyser.model.Meeting;
 import zzpj.breathalyser.model.User;
 import zzpj.breathalyser.model.UserDetails;
 import zzpj.breathalyser.service.IMeetingService;
 import zzpj.breathalyser.service.IUsersService;
+import zzpj.breathalyser.service.SoberCalculator;
 import zzpj.breathalyser.tasks.AddFriendTask;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -67,6 +68,17 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<User, String> eventUserName;
     @FXML private TableColumn<User, String> eventUserSurname;
 
+    @FXML private TableView<User> drinks;
+    @FXML private TableColumn<Drink, String> nameOfDrinkColumn;
+    @FXML private TableColumn<Drink, Double> volumeOfDrinkInMlColumn;
+    @FXML private TableColumn<Drink, Double> percentageOfEthanolInDrinkColumn;
+
+    @FXML private TextField nameOfDrink;
+    @FXML private TextField volumeInMl;
+    @FXML private TextField percentage;
+
+    @FXML private TextField permille;
+    SoberCalculator calculator = new SoberCalculator();
 
     @Override
     @FXML
@@ -109,26 +121,48 @@ public class DashboardController implements Initializable {
 
         Meeting meeting = new Meeting();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime startTime = LocalDateTime.parse(addStartTime.getText(), formatter);
-        LocalDateTime endTime = LocalDateTime.parse(addEndTime.getText(), formatter);
 
-        if (checkDateTime()) {
-            meeting.setStartTime(startTime);
-            meeting.setEndTime(endTime);
-            meetingService.createEvent(meeting);
+        final String startTimeString = addStartTime.getText();
+        final String endTimeString = addEndTime.getText();
+
+        LocalDateTime startTime = LocalDateTime.parse(startTimeString, formatter);
+        LocalDateTime endTime = LocalDateTime.parse(endTimeString, formatter);
+        meeting.setStartTime(startTime);
+        meeting.setEndTime(endTime);
+        meeting.setLocation(addLocation.getText());
+        final ObservableList<User> selectedCells = friendsInEvents.getSelectionModel().getSelectedItems();
+        meeting.setUsersInMeeting(selectedCells);
+        for (User user: selectedCells) {
+            if(user != null){
+                usersService.removeUserAvailableFromEvent(user);
+            }
         }
+        System.out.println(selectedCells);
+
+        meetingService.createEvent(meeting);
+
+
     }
 
     private void initFriendsInEvents() {
         eventUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         eventUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        friendsInEvents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
 
-    private boolean checkDateTime() {
+    private void initDrinksColumn() {
+        nameOfDrinkColumn.setCellValueFactory(new PropertyValueFactory<>("nameOfDrink"));
+        volumeOfDrinkInMlColumn.setCellValueFactory(new PropertyValueFactory<>("volumeOfDrinkInMl"));
+        percentageOfEthanolInDrinkColumn.setCellValueFactory(new PropertyValueFactory<>("percentageOfEthanolInDrinkC"));
+    }
 
-        return FieldValidator.isDateTimeValid(addStartTime.getText())
-                && FieldValidator.isDateTimeValid(addEndTime.getText());
+    public void addDrink(){
+        Drink drink = new Drink(nameOfDrink.getText(), new Double(volumeInMl.getText()), new Double(percentage.getText()));
+        calculator.addDrinkToListOfDrink(drink);
+        double drinkingPeriodInHours = ChronoUnit.HOURS.between(meetingService.getAllEvents().get(myMeetings.getSelectionModel().getSelectedIndex()).getStartTime(),  meetingService.getAllEvents().get(myMeetings.getSelectionModel().getSelectedIndex()).getEndTime());
+        Double currentPermille = calculator.getEstimatedPeakBloodAlcoholConcentration(myAccount.getUserDetails(), drinkingPeriodInHours);
+        permille.setText(currentPermille.toString());
     }
 
 }
