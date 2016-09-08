@@ -2,6 +2,7 @@ package zzpj.breathalyser.controller;
 
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -147,8 +148,10 @@ public class DashboardController implements Initializable {
         meeting.setStartTime(startTime);
         meeting.setEndTime(endTime);
         meeting.setLocation(addLocation.getText());
+        final ObservableList<User> tmp = FXCollections.observableArrayList();
         final ObservableList<User> selectedCells = friendsInEvents.getSelectionModel().getSelectedItems();
-        meeting.setUsersInMeeting(selectedCells);
+        tmp.addAll(selectedCells);
+        meeting.setUsersInMeeting(tmp);
         for (User user: selectedCells) {
             if(user != null){
                 usersService.removeUserAvailableFromEvent(user);

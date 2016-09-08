@@ -19,6 +19,6 @@ public class MeetingService implements IMeetingService {
 
     @Override
     public boolean createEvent(Meeting meeting) {
-        return !meetingRepository.getAllEvents().contains(meeting) && meetingRepository.createEvent(meeting);
+        return  meetingRepository.createEvent(meeting);
     }
 }

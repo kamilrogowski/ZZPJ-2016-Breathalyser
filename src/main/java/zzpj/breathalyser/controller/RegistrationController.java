@@ -72,12 +72,11 @@ public class RegistrationController {
             if (!passwordTyped.equals(passwordRepeatedTyped)) {
                 message.setText("PASSWORD MUST MATCH" + ValidationMessageSuffix.GRR);
             } else {
-                message.setText("");
                 final boolean userExists = usersService.addUser(user);
                 if (!userExists) {
                     message.setText("THIS LOGIN ALREADY EXISTS, TRY AGAIN" + ValidationMessageSuffix.EHH);
                 } else message.setText("");
-
+                message.setText("");
             }
         }
         else  message.setText("PLS BE POLITE AND DON'T DESTROY MY PROGRAM" + ValidationMessageSuffix.WRR);
