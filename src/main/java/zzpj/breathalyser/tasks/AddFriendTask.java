@@ -30,6 +30,7 @@ public class AddFriendTask extends TableCell<User, Boolean> {
                 buttonY.set(mouseEvent.getScreenY());
             }
         });
+
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

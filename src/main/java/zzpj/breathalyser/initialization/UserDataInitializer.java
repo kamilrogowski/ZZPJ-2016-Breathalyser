@@ -14,6 +14,7 @@ public class UserDataInitializer {
 
     private ObservableList<User> userData = FXCollections.observableArrayList();
 
+
     public ObservableList<User> initUsers() {
         for (int i = 0; i < USERS_MAX_SIZE; i++) {
             userData.add(generateUser(i));
