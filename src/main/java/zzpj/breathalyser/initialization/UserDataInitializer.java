@@ -9,7 +9,7 @@ import zzpj.breathalyser.model.UserDetails;
  * Created by Kamil Rogowski on 27.08.2016.
  */
 public class UserDataInitializer {
-
+//dsadsa
     private final int USERS_MAX_SIZE = 10;
 
     private ObservableList<User> userData = FXCollections.observableArrayList();
